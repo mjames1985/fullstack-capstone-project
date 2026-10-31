@@ -1,0 +1,24 @@
+.login-card {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-card h2 {
+    color: #333;
+}
+
+.login-card .form-control {
+    border-radius: 5px;
+}
+
+.login-card .btn-primary {
+    border-radius: 5px;
+}
+
+.login-card a {
+    text-decoration: none;
+}
+
+.login-card a:hover {
+    text-decoration: underline;
+}
