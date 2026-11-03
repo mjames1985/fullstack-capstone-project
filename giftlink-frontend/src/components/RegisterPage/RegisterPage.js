@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./RegisterPage.css";
+import { urlConfig } from "../../config";
 
 
 
@@ -13,6 +14,36 @@ function RegisterPage() {
     // Handle Register button click
     const handleRegister = async () => {
         console.log("Register invoked");
+    
+        try {
+            const response = await fetch(
+                `${urlConfig.backendUrl}/api/auth/register`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        firstName,
+                        lastName,
+                        email,
+                        password,
+                    }),
+                }
+            );
+    
+            const json = await response.json();
+    
+            console.log("Registration Response:", json);
+    
+            if (response.ok) {
+                alert("Registration successful");
+            } else {
+                alert("Registration failed");
+            }
+        } catch (error) {
+            console.error("Registration Error:", error);
+        }
     };
 
     return (

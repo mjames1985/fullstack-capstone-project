@@ -14,6 +14,23 @@ export default function Navbar() {
                     <li className="nav-item">
                         <a className="nav-link" href="/app">Gifts</a> {/* Updated Link */}
                     </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/app/search">
+                            Search
+                        </a>
+                    </li>
+
+                    <li className="nav-item">
+                        <a className="nav-link" href="/app/login">
+                            Login
+                        </a>
+                    </li>
+
+                    <li className="nav-item">
+                        <a className="nav-link" href="/app/register">
+                            Register
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
