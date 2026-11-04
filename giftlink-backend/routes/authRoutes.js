@@ -68,6 +68,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
+    console.log('LOGIN ROUTE HIT');
     try {
 
         // Task 1: Connect to giftsdb
