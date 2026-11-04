@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./RegisterPage.css";
 import { urlConfig } from "../../config";
-
+import { useAppContext } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 
 function RegisterPage() {
@@ -10,10 +11,22 @@ function RegisterPage() {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showerr, setShowerr] = useState('');
+
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAppContext();
 
     // Handle Register button click
     const handleRegister = async () => {
         console.log("Register invoked");
+        setShowerr('');
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailRegex.test(email)) {
+            setShowerr("Please enter a valid email address.");
+            return;
+        }
     
         try {
             const response = await fetch(
@@ -21,18 +34,32 @@ function RegisterPage() {
                 {
                     method: "POST",
                     headers: {
-                        "Content-Type": "application/json",
+                        'content-type': "application/json",
                     },
                     body: JSON.stringify({
-                        firstName,
-                        lastName,
-                        email,
-                        password,
-                    }),
+                        firstName: firstName,
+                        lastName: lastName,
+                        email: email,
+                        password: password
+                    })
                 }
             );
     
             const json = await response.json();
+
+            if (json.authtoken) {
+                sessionStorage.setItem('auth-token', json.authtoken);
+                sessionStorage.setItem('name', firstName);
+                sessionStorage.setItem('email', json.email);
+    
+                setIsLoggedIn(true);
+    
+                navigate('/app');
+            }
+
+            if (json.error) {
+                setShowerr(json.error);
+            }
     
             console.log("Registration Response:", json);
     
@@ -118,6 +145,8 @@ function RegisterPage() {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
+
+                        <div className="text-danger">{showerr}</div>
 
                         {/* Register Button */}
                         <button

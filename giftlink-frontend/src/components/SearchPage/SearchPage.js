@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {urlConfig} from '../../config';
 
 function SearchPage() {
-
+    const [searchResults, setSearchResults] = useState([]);
     //Task 1: Define state variables for the search query, age range, and search results.
     const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
     const conditions = ['New', 'Like New', 'Older'];
