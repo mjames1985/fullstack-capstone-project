@@ -1,14 +1,56 @@
 import React, { useState } from "react";
 import "./LoginPage.css";
+import { urlConfig } from "../../config";
+import { useAppContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
     // useState hook variables
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAppContext();
 
     // handleLogin function
     const handleLogin = async () => {
         console.log("Inside handleLogin");
+
+        try {
+            const response = await fetch(
+                `${urlConfig.backendUrl}/api/auth/login`,
+                {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email,
+                        password
+                    })
+                }
+            );
+
+            const json = await response.json();
+
+            console.log("Login Response:", json);
+
+            if (json.authtoken) {
+                sessionStorage.setItem("auth-token", json.authtoken);
+                sessionStorage.setItem("name", json.userName);
+                sessionStorage.setItem("email", json.userEmail);
+
+                setIsLoggedIn(true);
+
+                navigate("/app");
+            }
+
+            if (json.error) {
+                alert(json.error);
+            }
+
+        } catch (error) {
+            console.error("Login Error:", error);
+        }
     };
 
     return (
