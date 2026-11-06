@@ -17,9 +17,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 20
 
       - name: Install JSHint
         run: npm install jshint --global
@@ -41,9 +41,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 20
 
       - name: Install Dependencies and Build
         run: |
