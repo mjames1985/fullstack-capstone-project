@@ -4,10 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {urlConfig} from '../../config';
 
 function SearchPage() {
-    const [searchResults, setSearchResults] = useState([]);
+    // const [searchResults, setSearchResults] = useState([]);
+    const [,setSearchResults] = useState([]);
     //Task 1: Define state variables for the search query, age range, and search results.
-    const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
-    const conditions = ['New', 'Like New', 'Older'];
+    // const categories = ['Living', 'Bedroom', 'Bathroom', 'Kitchen', 'Office'];
+    // const conditions = ['New', 'Like New', 'Older'];
 
     useEffect(() => {
         // fetch all products
@@ -33,11 +34,11 @@ function SearchPage() {
 
     // Task 2. Fetch search results from the API based on user inputs.
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const goToDetailsPage = (productId) => {
-        // Task 6. Enable navigation to the details page of a selected gift.
-    };
+    // const goToDetailsPage = (productId) => {
+    //     // Task 6. Enable navigation to the details page of a selected gift.
+    // };
 
 
 
